@@ -1,0 +1,30 @@
+import requests
+import bs4
+
+big_ten = ['illinois', 
+          'indiana',
+          'iowa',
+          'maryland',
+          'michigan',
+          'michigan-state',
+          'minnesota',
+          'nebraska',
+          'northwestern',
+          'ohio-state',
+          'penn-state',
+          'purdue',
+          'rutgers',
+          'wisconsin']
+
+#big_ten_sites = []
+
+for team in big_ten:
+    url = 'https://www.sports-reference.com/cbb/schools/{}/2019.html'.format(team)
+    #big_ten_sites.append(url)#
+    res = requests.get(url)
+    soup =bs4.BeautifulSoup(res.text, 'lxml')
+    for link in soup.find_all('td'):
+        if link.get('data-stat') == 'player':
+            names=link.get('csk')
+            names=names.split(',')
+            print(names[1], names[0])
