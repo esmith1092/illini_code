@@ -1,3 +1,4 @@
+
 import requests
 import bs4
 
@@ -17,7 +18,7 @@ big_ten = ['illinois',
           'wisconsin']
 
 #big_ten_sites = []
-
+n= 0
 for team in big_ten:
     url = 'https://www.sports-reference.com/cbb/schools/{}/2019.html'.format(team)
     #big_ten_sites.append(url)#
@@ -27,4 +28,5 @@ for team in big_ten:
         if link.get('data-stat') == 'player':
             names=link.get('csk')
             names=names.split(',')
-            print(names[1], names[0])
+            n = n+1
+            print(n,names[1], names[0], team.capitalize())
